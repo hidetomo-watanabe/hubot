@@ -5,4 +5,3 @@ log
 slack_token
 dump.rdb
 scripts/example.coffee
-data/
