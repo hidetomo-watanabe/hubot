@@ -1,8 +1,8 @@
 # XXX-bot
 
 ## memo
-- 最低限のロジックしかGitHubには上げない
-	- 使いたいときは再構築
+- がんばるぞい
+- みさわ
 
 ## original readme
 XXX-bot is a chat bot built on the [Hubot][hubot] framework. It was
