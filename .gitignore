@@ -3,3 +3,5 @@ node_modules
 .hubot_history
 log
 slack_token
+dump.rdb
+scripts/example.coffee
