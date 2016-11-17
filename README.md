@@ -2,7 +2,7 @@
 
 ## memo
 - fyi
-- がんばるぞい
+- ぞい子
 - みさわ
 
 ## original readme
