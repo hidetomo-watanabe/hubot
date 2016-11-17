@@ -1,6 +1,7 @@
 # XXX-bot
 
 ## memo
+- fyi
 - がんばるぞい
 - みさわ
 
