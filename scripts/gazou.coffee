@@ -4,10 +4,14 @@ module.exports = (robot) ->
     unixtime = (new Date).getTime()
     res.send "https://raw.githubusercontent.com/hidetomo-watanabe/test/master/zoi.jpeg?"+unixtime
 
-  robot.hear /おはようございます/i, (res) ->
+  robot.hear /おはよう/i, (res) ->
     unixtime = (new Date).getTime()
     res.send "https://raw.githubusercontent.com/hidetomo-watanabe/test/master/ohayou.jpeg?"+unixtime
 
-  robot.hear /おつかれさまでした/i, (res) ->
+  robot.hear /おつかれ/i, (res) ->
     unixtime = (new Date).getTime()
     res.send "https://raw.githubusercontent.com/hidetomo-watanabe/test/master/kaerou.jpg?"+unixtime
+
+  robot.hear /やすもう/i, (res) ->
+    unixtime = (new Date).getTime()
+    res.send "https://raw.githubusercontent.com/hidetomo-watanabe/test/master/yasumu.jpg?"+unixtime
