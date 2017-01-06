@@ -2,7 +2,7 @@ node_modules
 .DS_Store*
 .hubot_history
 log
-slack_token
 dump.rdb
 scripts/example.coffee
+data/slack_token
 data/fyis
