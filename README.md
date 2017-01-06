@@ -4,6 +4,7 @@
 - fyi
 - ぞい子
 - みさわ
+- 天気通知
 
 ## original readme
 XXX-bot is a chat bot built on the [Hubot][hubot] framework. It was
