@@ -48,6 +48,7 @@ module.exports = (robot) ->
           robot.send envelope, createText(obj)
     start: false
   )
+  cronJob.start()
   
   robot.respond /start_weather_cron/i, (res) ->
     cronJob.start()
