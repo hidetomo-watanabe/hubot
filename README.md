@@ -1,7 +1,7 @@
 # XXX-bot
 
 ## cron
-- * * * * * cd <dir>; sh ./monitoring.sh >> <log> 2>&1
+- * * * * * cd [dir]; sh ./monitoring.sh >> [log] 2>&1
 
 ## memo
 - fyi
