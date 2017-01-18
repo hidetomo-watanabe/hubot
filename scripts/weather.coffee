@@ -29,8 +29,8 @@ module.exports = (robot) ->
     obj.description.text
 
   createText = (obj) ->
-    text = '今日明日の天気は悪いようです。'
-    text += '\n'
+    text = ''
+    text += '```'
     text += '\n'
     text += '今日: [' + getTelopToday(obj) + ']'
     text += '\n'
@@ -38,6 +38,12 @@ module.exports = (robot) ->
     text += '\n'
     text += '\n'
     text += getDescription(obj)
+    text += '\n'
+    text += '```'
+
+  robot.respond /天気/i, (res) ->
+    getWeatherObj (obj) ->
+      res.send createText(obj)
 
   cronJob = new cronJob(
     cronTime: conf.cron
@@ -45,10 +51,10 @@ module.exports = (robot) ->
       envelope = room: conf.channel
       getWeatherObj (obj) ->
         if isBad(getTelopToday(obj), getTelopTommorow(obj))
+          robot.send envelope, '今日、明日の天気が悪いようです。'
           robot.send envelope, createText(obj)
-    start: false
+    start: true
   )
-  cronJob.start()
   
   robot.respond /start_weather_cron/i, (res) ->
     cronJob.start()
