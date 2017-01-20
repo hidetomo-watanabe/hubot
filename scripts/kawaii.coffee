@@ -2,7 +2,7 @@ image_url = 'https://raw.githubusercontent.com/hidetomo-watanabe/image_files/mas
 
 module.exports = (robot) ->
 
-  robot.hear /がっきー|ガッキー/i, (res) ->
+  robot.hear /がっきー|ガッキー|新垣結衣/i, (res) ->
     unixtime = (new Date).getTime()
     nums = [
       '1.png',
@@ -14,6 +14,12 @@ module.exports = (robot) ->
     ]
     num = nums[Math.floor(Math.random()*nums.length)]
     res.send image_url + 'gakky' + num + '?' +unixtime
+
+  robot.hear /はしかん|かんなちゃん|橋本環奈/i, (res) ->
+    unixtime = (new Date).getTime()
+    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    num = nums[Math.floor(Math.random()*nums.length)]
+    res.send image_url + 'kannna' + num + '.jpg?' +unixtime
 
   robot.hear /今日も一日/i, (res) ->
     unixtime = (new Date).getTime()
