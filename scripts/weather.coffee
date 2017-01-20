@@ -51,7 +51,7 @@ module.exports = (robot) ->
       envelope = room: conf.channel
       getWeatherObj (obj) ->
         if isBad(getTelopToday(obj), getTelopTommorow(obj))
-          robot.send envelope, '今日、明日の天気が悪いようです。'
+          robot.send envelope, 'どうも天気が悪いようです。'
           robot.send envelope, createText(obj)
     start: true
   )
