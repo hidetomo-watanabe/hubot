@@ -1,5 +1,12 @@
 image_url = 'https://raw.githubusercontent.com/hidetomo-watanabe/gakky/master/'
-nums = ['1.png', '2.jpg', '3.png', '4.png', '5.jpeg']
+nums = [
+  '1.png',
+  '2.jpg',
+  '3.png',
+#  '4.png',
+#  '5.jpeg',
+  '6.gif',
+]
 
 module.exports = (robot) ->
 
