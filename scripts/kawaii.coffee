@@ -31,6 +31,10 @@ module.exports = (robot) ->
     unixtime = (new Date).getTime()
     res.send image_url + 'yasumu.jpg?' +unixtime
 
+  robot.hear /明日は土曜日/i, (res) ->
+    unixtime = (new Date).getTime()
+    res.send image_url + 'doyoubi.jpeg?' +unixtime
+
   robot.hear /スプーン曲げ/i, (res) ->
     unixtime = (new Date).getTime()
     res.send image_url + 'spoonmage.gif?' +unixtime
