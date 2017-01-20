@@ -10,7 +10,7 @@ nums = [
 
 module.exports = (robot) ->
 
-  robot.hear /がっきー/i, (res) ->
+  robot.hear /がっきー|ガッキー/i, (res) ->
     unixtime = (new Date).getTime()
     num = nums[Math.floor(Math.random()*nums.length)]
     res.send image_url + 'gakky' + num + '?' +unixtime
