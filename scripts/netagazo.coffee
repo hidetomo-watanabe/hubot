@@ -13,13 +13,13 @@ module.exports = (robot) ->
       '6.gif',
     ]
     num = nums[Math.floor(Math.random()*nums.length)]
-    res.send image_url + '/gakky/' + num + '?' +unixtime
+    res.send image_url + 'gakky/' + num + '?' +unixtime
 
   robot.hear /はしかん|かんなちゃん|橋本環奈/i, (res) ->
     unixtime = (new Date).getTime()
     nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     num = nums[Math.floor(Math.random()*nums.length)]
-    res.send image_url + '/kannna/' + num + '.jpg?' +unixtime
+    res.send image_url + 'kannna/' + num + '.jpg?' +unixtime
 
   robot.hear /飲むぞ/i, (res) ->
     unixtime = (new Date).getTime()
@@ -31,7 +31,7 @@ module.exports = (robot) ->
       '5.gif',
     ]
     num = nums[Math.floor(Math.random()*nums.length)]
-    res.send image_url + '/nomuzo/' + num + '?' +unixtime
+    res.send image_url + 'nomuzo/' + num + '?' +unixtime
 
   robot.hear /今日も一日/i, (res) ->
     unixtime = (new Date).getTime()
