@@ -5,9 +5,8 @@
 
 ## memo
 - fyi
-- ぞい子
-- みさわ
 - 天気通知
+- かわいい
 
 ## original readme
 XXX-bot is a chat bot built on the [Hubot][hubot] framework. It was
