@@ -33,6 +33,18 @@ module.exports = (robot) ->
     num = nums[Math.floor(Math.random()*nums.length)]
     res.send image_url + 'nomuzo/' + num + '?' +unixtime
 
+  robot.hear /なんだって/i, (res) ->
+    unixtime = (new Date).getTime()
+    nums = [
+      '1.png',
+      '2.jpg',
+      '3.jpg',
+      '4.jpg',
+      '5.jpg',
+    ]
+    num = nums[Math.floor(Math.random()*nums.length)]
+    res.send image_url + 'nandatte/' + num + '?' +unixtime
+
   robot.hear /今日も一日/i, (res) ->
     unixtime = (new Date).getTime()
     res.send image_url + 'zoi.jpeg?' +unixtime
