@@ -8,8 +8,11 @@ module.exports = (robot) ->
 
   getWeatherObj = (cb) ->
     req = require('request')
-    req {url: 'http://weather.livedoor.com/forecast/webservice/json/v1?city=140010'}, (err, res, body) ->
-      cb JSON.parse(body)
+    options =
+      url: 'http://weather.livedoor.com/forecast/webservice/json/v1?city=140010'
+      json: true
+    req options, (err, res, body) ->
+      cb body
       return
     return
 
@@ -32,9 +35,9 @@ module.exports = (robot) ->
     text = ''
     text += '```'
     text += '\n'
-    text += '今日: [' + getTelopToday(obj) + ']'
+    text += '今日: ' + getTelopToday(obj)
     text += '\n'
-    text += '明日: [' + getTelopTommorow(obj) + ']'
+    text += '明日: ' + getTelopTommorow(obj)
     text += '\n'
     text += '\n'
     text += getDescription(obj)
