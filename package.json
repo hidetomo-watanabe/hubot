@@ -1,9 +1,9 @@
 {
-  "name": "soinn-bot",
+  "name": "XXX-bot",
   "version": "0.0.0",
   "private": true,
   "author": "hidetomo",
-  "description": "soinn-bot",
+  "description": "XXX-bot",
   "dependencies": {
     "cron": "^1.2.1",
     "hubot": "^2.19.0",
