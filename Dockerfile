@@ -1,17 +1,23 @@
 FROM node
 MAINTAINER hidetomo
 
-# install
+# install hubot
 RUN npm install -g yo generator-hubot
 RUN npm list -g yo generator-hubot
 
-# user
+# create user
 RUN useradd hidetomo
 RUN mkdir /home/hidetomo && chown hidetomo:hidetomo /home/hidetomo
+
+# sudo
+RUN yum -y install sudo
+RUN echo "hidetomo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# change user and dir
 USER hidetomo
 WORKDIR /home/hidetomo
 
-# create
+# create hubot
 RUN yo hubot --owner "hidetomo" --name "XXX-bot" --description "XXX-bot" --adapter slack
 
 # customize
