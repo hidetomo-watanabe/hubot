@@ -9,12 +9,17 @@ RUN npm list -g yo generator-hubot
 RUN useradd hidetomo
 RUN mkdir /home/hidetomo && chown hidetomo:hidetomo /home/hidetomo
 
-# copy
+# create dir
 USER hidetomo
 RUN mkdir /home/hidetomo/hubot
 RUN mkdir /home/hidetomo/hubot/data
 WORKDIR /home/hidetomo/hubot
 USER root
+
+# copy
+COPY pacakge.json package.json_tmp
+RUN tr \\r \\n <package.json_tmp> tmp && mv tmp package.json_tmp
+RUN chown hidetomo:hidetomo package.json_tmp
 COPY restart_bot.sh restart_bot.sh
 RUN tr \\r \\n <restart_bot.sh> tmp && mv tmp restart_bot.sh
 RUN chown hidetomo:hidetomo restart_bot.sh
@@ -35,6 +40,8 @@ WORKDIR /home/hidetomo/hubot
 
 # create hubot
 RUN yo hubot --owner "hidetomo" --name "XXX-bot" --description "XXX-bot" --adapter slack
+RUN mv package.json_tmp package.json
+RUN npm install
 
 # start command
 CMD ["/bin/bash", "/home/hidetomo/start.sh"]
