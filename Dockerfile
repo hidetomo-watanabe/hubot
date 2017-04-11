@@ -23,7 +23,7 @@ RUN mkdir /home/hidetomo/hubot
 RUN mkdir /home/hidetomo/hubot/data
 RUN mkdir /home/hidetomo/hubot/scripts_tmp
 
-# copy
+# copy hubot files
 WORKDIR /home/hidetomo/hubot
 COPY package.json package.json_tmp
 RUN sudo chown hidetomo:hidetomo package.json_tmp
@@ -33,13 +33,9 @@ COPY scripts scripts_tmp/
 RUN sudo chown hidetomo:hidetomo scripts_tmp/*
 COPY restart_bot.sh restart_bot.sh
 RUN sudo chown hidetomo:hidetomo restart_bot.sh
-COPY monitoring.sh monitoring.sh
-RUN sudo chown hidetomo:hidetomo monitoring.sh
 COPY data/slack_token data/slack_token
 RUN sudo chown hidetomo:hidetomo data/slack_token
 WORKDIR /home/hidetomo
-COPY docker/start.sh start.sh
-RUN sudo chown hidetomo:hidetomo start.sh
 
 # create hubot
 WORKDIR /home/hidetomo/hubot
@@ -51,5 +47,15 @@ RUN mv scripts_tmp/* scripts/
 RUN rmdir scripts_tmp
 WORKDIR /home/hidetomo
 
-# start command
+# cron
+RUN sudo apt-get -y install cron
+COPY cron.txt cron.txt
+RUN sudo chown hidetomo:hidetomo cron.txt
+COPY monitoring.sh monitoring.sh
+RUN sudo chown hidetomo:hidetomo monitoring.sh
+RUN crontab cron.txt
+
+# start
+COPY docker/start.sh start.sh
+RUN sudo chown hidetomo:hidetomo start.sh
 CMD ["/bin/bash", "/home/hidetomo/start.sh"]
