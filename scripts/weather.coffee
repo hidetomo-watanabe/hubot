@@ -1,8 +1,9 @@
 cronJob = require('cron').CronJob
 conf =
   channel: '#weather'
-  cron: '00 00 02 * * 1-5'
-  bad_condition: /[雨雪雷]/
+  cronTomorrow: '00 00 02 * * 1-5'
+  cronToday: '00 00 23 * * 0-4'
+  badCondition: /[雨雪雷]/
 
 module.exports = (robot) ->
 
@@ -22,8 +23,8 @@ module.exports = (robot) ->
   getTelopTommorow = (obj) ->
     obj.forecasts[1].telop
 
-  isBad = (today, tommorow) ->
-    if today.match(conf.bad_condition) or tommorow.match(conf.bad_condition)
+  isBad = (telop) ->
+    if telop.match(conf.badCondition)
       true
     else
       false
@@ -48,19 +49,31 @@ module.exports = (robot) ->
     getWeatherObj (obj) ->
       res.send createText(obj)
 
-  cronJob = new cronJob(
-    cronTime: conf.cron
+  cronJobToday = new cronJob(
+    cronTime: conf.cronToday
     onTick: ->
       envelope = room: conf.channel
       getWeatherObj (obj) ->
-        if isBad(getTelopToday(obj), getTelopTommorow(obj))
-          robot.send envelope, 'どうも天気が悪いようです。'
+        if isBad(getTelopToday(obj))
+          robot.send envelope, '(昨日も言ってたらごめんなさい。)'
+          robot.send envelope, '今日は天気が悪いようです。'
+          robot.send envelope, createText(obj)
+    start: true
+  )
+
+  cronJobTomorrow = new cronJob(
+    cronTime: conf.cronTomorrow
+    onTick: ->
+      envelope = room: conf.channel
+      getWeatherObj (obj) ->
+        if isBad(getTelopTommorow(obj))
+          robot.send envelope, '明日は天気が悪いようです。'
           robot.send envelope, createText(obj)
     start: true
   )
   
   robot.respond /start_weather_cron/i, (res) ->
-    cronJob.start()
+    cronJobTomorrow.start()
     text = 'I start weather cron'
     text += '\n'
     text += 'weather channel: ' + conf.channel
@@ -69,6 +82,6 @@ module.exports = (robot) ->
     res.send text
  
   robot.respond /stop_weather_cron/i, (res) ->
-    cronJob.stop()
+    cronJobTomorrow.stop()
     text = 'I stop weather cron'
     res.send text
