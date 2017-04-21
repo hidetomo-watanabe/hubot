@@ -30,7 +30,7 @@ module.exports = (robot) ->
       new_id = last_id + 1
       fs.appendFileSync(memos_path, '\n')
     fs.appendFileSync(memos_path, new_id + ': ' + input_memo)
-    res.send 'I remember ' + input_memo
+    res.send 'I remember memo' + new_id + ': \n  ' + input_memo
 
   robot.respond /lsmemo$/i, (res) ->
     memos = getMemos()
@@ -44,4 +44,4 @@ module.exports = (robot) ->
     memos = getMemos()
     removed = removeMemo(memos, input_id)
     fs.writeFileSync(memos_path, removed)
-    res.send 'I forget ' + input_id
+    res.send 'I forget memo' + input_id
