@@ -1,5 +1,5 @@
 fs = require('fs')
-memos_path = '/home/vagrant/soinn-bot/hubot/data/memos'
+memos_path = './data/memos'
 
 module.exports = (robot) ->
 
