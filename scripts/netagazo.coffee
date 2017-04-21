@@ -44,27 +44,15 @@ module.exports = (robot) ->
 
   robot.hear /飲むぞ/i, (res) ->
     unixtime = (new Date).getTime()
-    nums = [
-      '1.jpg',
-      '2.jpg',
-      '3.png',
-      '4.jpg',
-      '5.gif',
-    ]
-    num = nums[Math.floor(Math.random()*nums.length)]
-    res.send github_url + 'nomuzo/' + num + '?' +unixtime
+    target = 'nomuzo'
+    getGithubUrl target, (image_url) ->
+      res.send image_url + '?' + unixtime
 
   robot.hear /なんだって/i, (res) ->
     unixtime = (new Date).getTime()
-    nums = [
-      '1.png',
-      '2.jpg',
-      '3.jpg',
-      '4.jpg',
-      '5.jpg',
-    ]
-    num = nums[Math.floor(Math.random()*nums.length)]
-    res.send github_url + 'nandatte/' + num + '?' +unixtime
+    target = 'nandatte'
+    getGithubUrl target, (image_url) ->
+      res.send image_url + '?' + unixtime
 
   robot.hear /今日も一日/i, (res) ->
     unixtime = (new Date).getTime()
