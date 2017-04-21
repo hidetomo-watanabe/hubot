@@ -8,7 +8,9 @@ module.exports = (robot) ->
     memos = fs.readFileSync(memos_path).toString().replace(/\n+$/g, '')
     if memos != ''
       fs.appendFileSync(memos_path, '\n')
-    fs.appendFileSync(memos_path, input_memo)
+    lines_num = (memos.match(/\n/g) || []).length
+    id = lines_num + 1
+    fs.appendFileSync(memos_path, id + ': ' + input_memo)
     res.send 'I remember ' + input_memo
 
   robot.respond /lsmemo$/i, (res) ->
@@ -16,4 +18,4 @@ module.exports = (robot) ->
     if memos == ''
       res.send 'NO MEMO'
     else
-      res.send '[memo list]\n' + memos
+      res.send '[id: memo]\n' + memos
