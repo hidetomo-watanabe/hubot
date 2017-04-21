@@ -2,6 +2,19 @@ github_url = 'https://raw.githubusercontent.com/hidetomo-watanabe/image_files/ma
 
 module.exports = (robot) ->
 
+  getGithubUrl = (target, cb) ->
+    base_url = 'https://api.github.com/repos/hidetomo-watanabe/image_files/contents/'
+    req = require('request')
+    options =
+      url: base_url + target
+      json: true
+    req options, (err, res, body) ->
+      images = body
+      image = images[Math.floor(Math.random()*images.length)]
+      cb image.download_url
+      return
+    return
+
   getPhotozouUrl = (target, cb) ->
     base_url = 'https://api.photozou.jp/rest/search_public.json?keyword='
     req = require('request')
@@ -17,16 +30,9 @@ module.exports = (robot) ->
 
   robot.hear /がっきー|ガッキー|新垣結衣/i, (res) ->
     unixtime = (new Date).getTime()
-    nums = [
-      '1.png',
-      '2.jpg',
-      '3.png',
-    # '4.png',
-    # '5.jpeg',
-      '6.gif',
-    ]
-    num = nums[Math.floor(Math.random()*nums.length)]
-    res.send github_url + 'gakky/' + num + '?' +unixtime
+    target = 'gakky'
+    getGithubUrl target, (image_url) ->
+      res.send image_url + '?' + unixtime
 
   robot.hear /はしかん|かんなちゃん|橋本環奈/i, (res) ->
     unixtime = (new Date).getTime()
