@@ -9,7 +9,8 @@ module.exports = (robot) ->
     if memos == ''
       id = 1
     else
-      last_id = Number(memos.split('\n')[-1].split(':')[0])
+      tmp = memos.split('\n')
+      last_id = Number(tmp[tmp.length - 1].split(':')[0])
       id = last_id + 1
       fs.appendFileSync(memos_path, '\n')
     fs.appendFileSync(memos_path, id + ': ' + input_memo)
