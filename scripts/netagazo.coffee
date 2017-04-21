@@ -7,6 +7,7 @@ module.exports = (robot) ->
     req = require('request')
     options =
       url: base_url + target
+      headers: {'User-Agent': 'hogehoge'}
       json: true
     req options, (err, res, body) ->
       images = body
@@ -20,6 +21,7 @@ module.exports = (robot) ->
     req = require('request')
     options =
       url: base_url + target
+      headers: {'User-Agent': 'hogehoge'}
       json: true
     req options, (err, res, body) ->
       photos = body.info.photo
