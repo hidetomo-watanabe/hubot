@@ -44,4 +44,4 @@ module.exports = (robot) ->
     memos = getMemos()
     removed = removeMemo(memos, input_id)
     fs.writeFileSync(memos_path, removed)
-    res.send 'I remove ' + input_id
+    res.send 'I forget ' + input_id
