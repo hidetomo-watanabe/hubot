@@ -18,6 +18,9 @@ RUN npm list -g yo generator-hubot
 USER hidetomo
 WORKDIR /home/hidetomo
 
+# common apt-get
+RUN sudo apt-get -y install vim
+
 # create dir
 RUN mkdir /home/hidetomo/hubot
 RUN mkdir /home/hidetomo/hubot/data
