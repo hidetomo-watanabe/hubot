@@ -17,7 +17,9 @@ module.exports = (robot) ->
     res.send 'I remember ' + input_memo
 
   robot.respond /lsmemo$/i, (res) ->
-    memos = fs.readFileSync(memos_path).toString().replace(/\n+$/g, '')
+    memos = fs.readFileSync(memos_path).toString()
+    .replace(/\n+$/g, '')
+    .replace(/\n\n+/g, '\n')
     if memos == ''
       res.send 'NO MEMO'
     else
