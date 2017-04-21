@@ -8,17 +8,20 @@ module.exports = (robot) ->
     .replace(/\n+$/g, '')
     .replace(/\n\n+/g, '\n')
 
+  getMemos = () ->
+    cleanNewLine(fs.readFileSync(memos_path).toString())
+
   removeMemo = (input_memos, id) ->
     output = ''
-    for i, memo in input_memos.split('\n')
+    for memo, i in input_memos.split('\n')
       if id == memo.split(':')[0]
         continue
-      output += memo
-    output
+      output += memo + '\n'
+    cleanNewLine(output)
 
   robot.respond /memo /i, (res) ->
     input_memo = res.message.text.split(' ')[2]
-    memos = cleanNewLine(fs.readFileSync(memos_path).toString())
+    memos = getMemos()
     if memos == ''
       new_id = 1
     else
@@ -30,7 +33,7 @@ module.exports = (robot) ->
     res.send 'I remember ' + input_memo
 
   robot.respond /lsmemo$/i, (res) ->
-    memos = cleanNewLine(fs.readFileSync(memos_path).toString())
+    memos = getMemos()
     if memos == ''
       res.send 'NO MEMO'
     else
@@ -38,7 +41,7 @@ module.exports = (robot) ->
 
   robot.respond /rmmemo /i, (res) ->
     input_id = res.message.text.split(' ')[2]
-    memos = cleanNewLine(fs.readFileSync(memos_path).toString())
+    memos = getMemos()
     removed = removeMemo(memos, input_id)
     fs.writeFileSync(memos_path, removed)
     res.send 'I remove ' + input_id
