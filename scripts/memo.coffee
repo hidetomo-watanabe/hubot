@@ -3,9 +3,14 @@ memos_path = './data/memos'
 
 module.exports = (robot) ->
 
+  cleanNewLine = (text) ->
+    text
+    .replace(/\n+$/g, '')
+    .replace(/\n\n+/g, '\n')
+
   robot.respond /memo /i, (res) ->
     input_memo = res.message.text.split(' ')[2]
-    memos = fs.readFileSync(memos_path).toString().replace(/\n+$/g, '')
+    memos = cleanNewLine(fs.readFileSync(memos_path).toString())
     if memos == ''
       id = 1
     else
@@ -17,9 +22,7 @@ module.exports = (robot) ->
     res.send 'I remember ' + input_memo
 
   robot.respond /lsmemo$/i, (res) ->
-    memos = fs.readFileSync(memos_path).toString()
-    .replace(/\n+$/g, '')
-    .replace(/\n\n+/g, '\n')
+    memos = cleanNewLine(fs.readFileSync(memos_path).toString())
     if memos == ''
       res.send 'NO MEMO'
     else
