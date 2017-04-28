@@ -21,6 +21,10 @@ RUN npm list -g yo generator-hubot
 # change user and dir
 USER hidetomo
 WORKDIR /home/hidetomo
+ENV HOME /home/hidetomo
+
+# alias
+RUN echo "alias ls='ls --color'" >> .bashrc
 
 # common apt-get
 RUN sudo apt-get -y install vim
