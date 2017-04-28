@@ -4,5 +4,6 @@ node_modules
 log
 dump.rdb
 scripts/example.coffee
+data/memos
 data/slack_token
-data/fyis
+data/vgg16.h5
