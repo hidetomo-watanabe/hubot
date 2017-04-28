@@ -45,11 +45,15 @@ COPY scripts scripts_tmp/
 RUN sudo chown hidetomo:hidetomo scripts_tmp/*
 COPY restart_bot.sh restart_bot.sh
 RUN sudo chown hidetomo:hidetomo restart_bot.sh
+COPY bin/classify_by_vgg16.py bin/classify_by_vgg16.py
+RUN sudo chown hidetomo:hidetomo bin/classify_by_vgg16.py
 COPY data/memos data/memos
 RUN sudo chown hidetomo:hidetomo data/memos
 COPY data/slack_token data/slack_token
 RUN sudo chown hidetomo:hidetomo data/slack_token
 WORKDIR /home/hidetomo
+COPY data/vgg16.h5 data/vgg16.h5
+RUN sudo chown hidetomo:hidetomo data/vgg16.h5
 
 # create hubot
 WORKDIR /home/hidetomo/hubot
