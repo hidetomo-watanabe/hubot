@@ -28,6 +28,7 @@ RUN echo "alias ls='ls --color'" >> .bashrc
 
 # common apt-get
 RUN sudo apt-get -y install vim
+RUN sudo apt-get -y install less
 
 # create dir
 RUN mkdir /home/hidetomo/hubot
@@ -44,6 +45,8 @@ COPY scripts scripts_tmp/
 RUN sudo chown hidetomo:hidetomo scripts_tmp/*
 COPY restart_bot.sh restart_bot.sh
 RUN sudo chown hidetomo:hidetomo restart_bot.sh
+COPY data/memos data/memos
+RUN sudo chown hidetomo:hidetomo data/memos
 COPY data/slack_token data/slack_token
 RUN sudo chown hidetomo:hidetomo data/slack_token
 WORKDIR /home/hidetomo
