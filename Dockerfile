@@ -30,13 +30,16 @@ RUN echo "alias ls='ls --color'" >> .bashrc
 RUN sudo apt-get -y install vim
 RUN sudo apt-get -y install less
 
-# create dir
+# change dir
 RUN mkdir /home/hidetomo/hubot
-RUN mkdir /home/hidetomo/hubot/data
-RUN mkdir /home/hidetomo/hubot/scripts_tmp
+WORKDIR /home/hidetomo/hubot
+
+# init hubot
+RUN yo hubot --owner "hidetomo" --name "XXX-bot" --description "XXX-bot" --adapter slack
 
 # copy hubot files
-WORKDIR /home/hidetomo/hubot
+RUN mkdir /home/hidetomo/hubot/data
+RUN mkdir /home/hidetomo/hubot/scripts_tmp
 COPY package.json package.json_tmp
 RUN sudo chown hidetomo:hidetomo package.json_tmp
 COPY external-scripts.json external-scripts.json_tmp
@@ -51,18 +54,17 @@ COPY data/memos data/memos
 RUN sudo chown hidetomo:hidetomo data/memos
 COPY data/slack_token data/slack_token
 RUN sudo chown hidetomo:hidetomo data/slack_token
-WORKDIR /home/hidetomo
 COPY data/vgg16.h5 data/vgg16.h5
 RUN sudo chown hidetomo:hidetomo data/vgg16.h5
 
-# create hubot
-WORKDIR /home/hidetomo/hubot
-RUN yo hubot --owner "hidetomo" --name "XXX-bot" --description "XXX-bot" --adapter slack
+# cusomize hubot
 RUN mv package.json_tmp package.json
 RUN sudo npm install
 RUN mv external-scripts.json_tmp external-scripts.json
 RUN mv scripts_tmp/* scripts/
 RUN rmdir scripts_tmp
+
+# change dir
 WORKDIR /home/hidetomo
 
 # cron
