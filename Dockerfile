@@ -1,6 +1,10 @@
 FROM node
 MAINTAINER hidetomo
 
+# version
+ARG pyVer=anaconda3-4.0.0
+ARG pipVer=8.1.2
+
 # create user
 RUN useradd hidetomo
 RUN mkdir /home/hidetomo && chown hidetomo:hidetomo /home/hidetomo
@@ -57,6 +61,28 @@ RUN sudo chown hidetomo:hidetomo cron.txt
 COPY monitoring.sh monitoring.sh
 RUN sudo chown hidetomo:hidetomo monitoring.sh
 RUN crontab cron.txt
+
+# pyenv
+RUN git clone https://github.com/yyuu/pyenv.git .pyenv
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> .bashrc
+ENV PYENV_ROOT $HOME/.pyenv
+RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> .bashrc
+ENV PATH $PYENV_ROOT/bin:$PATH
+RUN echo 'eval "$(pyenv init -)"' >> .bashrc
+RUN echo 'export PYTHONIOENCODING=utf-8' >> .bashrc
+
+# anaconda
+# RUN pyenv install -l | grep ana
+RUN pyenv install ${pyVer}
+RUN pyenv rehash
+RUN pyenv global ${pyVer}
+RUN echo 'export PATH="$PYENV_ROOT/versions/'${pyVer}'/bin/:$PATH"' >> .bashrc
+ENV PATH $PYENV_ROOT/versions/${pyVer}/bin/:$PATH
+
+# keras
+RUN conda install -y pip=${pipVer}
+RUN pip install tensorflow
+RUN pip install keras
 
 # start
 COPY docker/start.sh start.sh
