@@ -45,7 +45,7 @@ module.exports = (robot) ->
     text += '\n'
     text += '```'
 
-  robot.respond /天気/i, (res) ->
+  robot.respond /weather|天気/i, (res) ->
     getWeatherObj (obj) ->
       res.send createText(obj)
 
