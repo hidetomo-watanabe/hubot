@@ -3,6 +3,23 @@ fig_path = '/tmp'
 
 module.exports = (robot) ->
 
+  getMsg = (result) ->
+    msg = ''
+    label = result.split(',')[0]
+    accuracy = result.split(',')[1]
+    if accuracy > 0.90
+      msg += 'きっと'
+    elif accuracy > 0.70
+      msg += 'たぶん'
+    elif accuracy > 0.50
+      msg += 'もしかすると'
+    elif accuracy > 0.30
+      msg += 'なんとなくですが'
+    else
+      msg += 'ぶっちゃけわかんないですけど'
+    msg += '、これは' + label + 'です。'
+    msg
+
   robot.respond /what |what's |これなに /i, (res) ->
     target = res.message.text.split(' ')[2]
     if not target.match(/http:\/\/|https:\/\//i)
@@ -15,7 +32,7 @@ module.exports = (robot) ->
         command_classify = 'python -u bin/classify_by_vgg16.py ' + fig_path + '/gazou_' + unixtime
         res.send 'Thinking...'
         child_process.exec command_classify, (err, stdout, stderr) ->
-          result = stdout
-          res.send 'This is\n' + stdout
+          msg = getMsg(stdout)
+          res.send msg
           command_rm = 'rm ' + fig_path + '/gazou_' + unixtime
           child_process.exec command_rm, (err, stdout, stderr) ->

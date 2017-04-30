@@ -24,7 +24,6 @@ if __name__ == '__main__':
     x = np.expand_dims(x, axis=0)
 
     preds = model.predict(preprocess_input(x))
-    results = decode_predictions(preds, top=5)[0]
-    for result in results:
-        print(result)
+    result = decode_predictions(preds, top=1)[0][0]
+    print('%s, %s' % (result[1], result[2]))
     import gc; gc.collect()
