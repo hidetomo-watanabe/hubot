@@ -20,7 +20,8 @@ module.exports = (robot) ->
     cleanNewLine(output)
 
   robot.respond /memo /i, (res) ->
-    input_memo = res.message.text.split(' ')[2]
+    tmp = res.message.text.split(' ')
+    input_memo = tmp[tmp.length - 1]
     memos = getMemos()
     if memos == ''
       new_id = 1
@@ -40,7 +41,8 @@ module.exports = (robot) ->
       res.send '[id: memo]\n' + memos
 
   robot.respond /rmmemo /i, (res) ->
-    input_id = res.message.text.split(' ')[2]
+    tmp = res.message.text.split(' ')
+    input_id = tmp[tmp.length - 1]
     memos = getMemos()
     removed = removeMemo(memos, input_id)
     fs.writeFileSync(memos_path, removed)
