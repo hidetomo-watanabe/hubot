@@ -17,3 +17,5 @@ module.exports = (robot) ->
         child_process.exec command_classify, (err, stdout, stderr) ->
           result = stdout
           res.send 'This is\n' + stdout
+          command_rm = 'rm ' + fig_path + '/gazou_' + unixtime
+          child_process.exec command_rm, (err, stdout, stderr) ->
