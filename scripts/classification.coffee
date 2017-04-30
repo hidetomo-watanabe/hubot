@@ -7,7 +7,7 @@ module.exports = (robot) ->
     target = res.message.text.split(' ')[2]
     if not target.match(/http:\/\/|https:\/\//i)
         res.send 'Sorry, I can understand only URL...'
-        res.finish
+        res.finish()
     unixtime = (new Date).getTime()
     command_wget = 'wget -O ' + fig_path + '/gazou_' + unixtime + ' ' + target
     res.send 'Downloading...'
