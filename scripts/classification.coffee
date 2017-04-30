@@ -9,11 +9,11 @@ module.exports = (robot) ->
     accuracy = result.split(',')[1]
     if accuracy > 0.90
       msg += 'きっと'
-    elif accuracy > 0.70
+    else if accuracy > 0.70
       msg += 'たぶん'
-    elif accuracy > 0.50
+    else if accuracy > 0.50
       msg += 'もしかすると'
-    elif accuracy > 0.30
+    else if accuracy > 0.30
       msg += 'なんとなくですが'
     else
       msg += 'ぶっちゃけわかんないですけど'
