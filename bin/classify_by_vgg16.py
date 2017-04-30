@@ -27,4 +27,4 @@ if __name__ == '__main__':
     results = decode_predictions(preds, top=5)[0]
     for result in results:
         print(result)
-    import gc: gc.collect()
+    import gc; gc.collect()
