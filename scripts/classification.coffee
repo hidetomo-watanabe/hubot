@@ -20,7 +20,7 @@ module.exports = (robot) ->
     msg += '、これは' + label + 'です。'
     msg
 
-  robot.respond /what[^ ]*  |これなに /i, (res) ->
+  robot.respond /what[^\s]*  |これなに /i, (res) ->
     target = res.message.text.split(' ')[2]
     if not target.match(/http:\/\/|https:\/\//i)
         res.send 'Sorry, I can understand only URL...'
