@@ -10,15 +10,16 @@ from keras.preprocessing import image
 if __name__ == '__main__':
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
     filename = sys.argv[1]
-    """
-    model = VGG16(
-        include_top=True,
-        weights='imagenet',
-        input_tensor=None,
-        input_shape=None)
-    model.save('data/vgg16.h5')
-    """
-    model = load_model('data/vgg16.h5')
+
+    if os.path.exists('data/vgg16.h5'):
+        model = load_model('data/vgg16.h5')
+    else:
+        model = VGG16(
+            include_top=True,
+            weights='imagenet',
+            input_tensor=None,
+            input_shape=None)
+        model.save('data/vgg16.h5')
     img = image.load_img(filename, target_size=(224, 224))
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
