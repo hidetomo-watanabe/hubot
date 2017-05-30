@@ -54,8 +54,6 @@ COPY data/memos data/memos
 RUN sudo chown hidetomo:hidetomo data/memos
 COPY data/slack_token data/slack_token
 RUN sudo chown hidetomo:hidetomo data/slack_token
-COPY data/vgg16.h5 data/vgg16.h5
-RUN sudo chown hidetomo:hidetomo data/vgg16.h5
 
 # cusomize hubot
 RUN mv package.json_tmp package.json
