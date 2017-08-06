@@ -10,7 +10,7 @@ module.exports = (robot) ->
   getWeatherObj = (cb) ->
     req = require('request')
     options =
-      url: 'http://weather.livedoor.com/forecast/webservice/json/v1?city=140010'
+      url: 'http://weather.livedoor.com/forecast/webservice/json/v1?city=120010'
       json: true
     req options, (err, res, body) ->
       cb body
