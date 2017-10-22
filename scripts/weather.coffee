@@ -45,16 +45,26 @@ module.exports = (robot) ->
     text += '今日: '
     text += getTelopToday(obj)
     text += ' '
-    text += getTemperatureToday(obj)['min']['celsius']
+    if getTemperatureToday(obj)['min']
+      text += getTemperatureToday(obj)['min']['celsius']
+    else
+      text += ' '
+    text += '℃'
     text += '-'
     text += getTemperatureToday(obj)['max']['celsius']
+    text += '℃'
     text += '\n'
     text += '明日: '
     text += getTelopTommorow(obj)
     text += ' '
-    text += getTemperatureTommorow(obj)['min']['celsius']
+    if getTemperatureTommorow(obj)['min']
+      text += getTemperatureTommorow(obj)['min']['celsius']
+    else
+      text += ' '
+    text += '℃'
     text += '-'
     text += getTemperatureTommorow(obj)['max']['celsius']
+    text += '℃'
     text += '\n'
     text += '\n'
     text += getDescription(obj)
