@@ -25,6 +25,7 @@ ENV HOME /home/hidetomo
 
 # alias
 RUN echo "alias ls='ls --color'" >> .bashrc
+RUN echo "alias ll='ls -la'" >> .bashrc
 
 # common apt-get
 RUN sudo apt-get -y install vim
