@@ -21,13 +21,23 @@ module.exports = (robot) ->
     obj.forecasts[0].telop
 
   getTemperatureToday = (obj) ->
-    obj.forecasts[0].temperature
+    output = obj.forecasts[0].temperature
+    if ! output['min']
+      output['min'] = {'celsius': '?'}
+    if ! output['max']
+      output['max'] = {'celsius': '?'}
+    output
 
   getTelopTommorow = (obj) ->
     obj.forecasts[1].telop
 
   getTemperatureTommorow = (obj) ->
-    obj.forecasts[1].temperature
+    output = obj.forecasts[1].temperature
+    if ! output['min']
+      output['min'] = {'celsius': '?'}
+    if ! output['max']
+      output['max'] = {'celsius': '?'}
+    output
 
   isBad = (telop) ->
     if telop.match(conf.badCondition)
@@ -45,10 +55,7 @@ module.exports = (robot) ->
     text += '今日: '
     text += getTelopToday(obj)
     text += ' '
-    if getTemperatureToday(obj)['min']
-      text += getTemperatureToday(obj)['min']['celsius']
-    else
-      text += ' '
+    text += getTemperatureToday(obj)['min']['celsius']
     text += '°C'
     text += '-'
     text += getTemperatureToday(obj)['max']['celsius']
@@ -57,10 +64,7 @@ module.exports = (robot) ->
     text += '明日: '
     text += getTelopTommorow(obj)
     text += ' '
-    if getTemperatureTommorow(obj)['min']
-      text += getTemperatureTommorow(obj)['min']['celsius']
-    else
-      text += ' '
+    text += getTemperatureTommorow(obj)['min']['celsius']
     text += '°C'
     text += '-'
     text += getTemperatureTommorow(obj)['max']['celsius']
