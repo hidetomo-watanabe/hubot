@@ -73,6 +73,7 @@ RUN sudo chown hidetomo:hidetomo cron.txt
 COPY monitoring.sh monitoring.sh
 RUN sudo chown hidetomo:hidetomo monitoring.sh
 RUN crontab cron.txt
+RUN sudo /etc/init.d/cron start
 
 # pyenv
 RUN git clone https://github.com/yyuu/pyenv.git .pyenv
