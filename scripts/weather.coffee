@@ -75,7 +75,7 @@ module.exports = (robot) ->
     text += '\n'
     text += '```'
 
-  robot.respond /weather|天気/i, (res) ->
+  robot.respond /.*(weather|天気)/i, (res) ->
     getWeatherObj (obj) ->
       res.send createText(obj)
 
@@ -107,7 +107,7 @@ module.exports = (robot) ->
     text += '\n'
     text += 'weather channel: ' + conf.channel
     text += '\n'
-    text += 'cron conf(UTC): ' + conf.cron
+    text += 'cron conf(UTC): ' + conf.cronTomorrow
     res.send text
  
   robot.respond /stop_weather_cron/i, (res) ->
