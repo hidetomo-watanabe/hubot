@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo /etc/init.d/cron start
 cd /home/hidetomo/hubot
 sh ./restart_bot.sh
 
