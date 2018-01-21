@@ -1,4 +1,6 @@
+fs = require('fs')
 cronJob = require('cron').CronJob
+weights_path = './data/weights'
 conf =
   channel: '#weight'
   time: '00 00 12 * * *'
@@ -9,9 +11,14 @@ module.exports = (robot) ->
     cronTime: conf.time
     onTick: ->
       envelope = room: conf.channel
-      robot.send envelope, 'ママ、体重測った？'
+      robot.send envelope, 'ママ、体重教えて'
     start: true
   )
+
+  robot.hear /kg/i, (res) ->
+    unixtime = (new Date).getTime()
+    input_text = res.message.text
+    fs.appendFileSync(weights_path, unixtime + ',' + input_text)
 
   robot.respond /start_weight_cron/i, (res) ->
     cronJobWeight.start()
