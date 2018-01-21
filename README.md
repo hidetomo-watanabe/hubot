@@ -6,6 +6,7 @@
 ## memo
 - fyi
 - 天気通知
+- 体重管理
 - かわいい
 
 ## original readme
