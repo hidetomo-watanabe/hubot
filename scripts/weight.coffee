@@ -3,7 +3,7 @@ cronJob = require('cron').CronJob
 weights_path = './data/weights'
 conf =
   channel: '#weight'
-  time: '00 00 12 * * *'
+  time: '00 00 12 * * 6'
 
 module.exports = (robot) ->
 
