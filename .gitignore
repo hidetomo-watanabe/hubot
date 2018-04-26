@@ -6,4 +6,5 @@ dump.rdb
 scripts/example.coffee
 data/memos
 data/slack_token
+data/weights
 data/vgg16.h5
