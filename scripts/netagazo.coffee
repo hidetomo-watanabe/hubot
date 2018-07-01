@@ -14,16 +14,13 @@ module.exports = (robot) ->
     return
 
   getPhotozouUrl = (target, cb) ->
-    base_url = 'https://api.photozou.jp/rest/search_public.json?keyword='
+    base_url = 'https://897tb9gzii.execute-api.us-east-2.amazonaws.com/v1/'
     req = require('request')
     options =
       url: base_url + target
-      headers: {'User-Agent': 'hogehoge'}
       json: true
-    req options, (err, res, body) ->
-      photos = body.info.photo
-      photo = photos[Math.floor(Math.random()*photos.length)]
-      cb photo.image_url
+   req options, (err, res, body) ->
+     cb body.url
       return
     return
 
