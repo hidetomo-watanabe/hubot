@@ -3,16 +3,13 @@ github_url = 'https://raw.githubusercontent.com/hidetomo-watanabe/image_files/ma
 module.exports = (robot) ->
 
   getGithubUrl = (target, cb) ->
-    base_url = 'https://api.github.com/repos/hidetomo-watanabe/image_files/contents/'
+    base_url = 'https://86889njpqa.execute-api.us-east-2.amazonaws.com/v1/'
     req = require('request')
     options =
       url: base_url + target
-      headers: {'User-Agent': 'hogehoge'}
       json: true
-    req options, (err, res, body) ->
-      images = body
-      image = images[Math.floor(Math.random()*images.length)]
-      cb image.download_url
+   req options, (err, res, body) ->
+     cb body.url
       return
     return
 
